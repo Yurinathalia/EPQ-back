@@ -22,7 +22,7 @@ public class BirthdayService {
     }
 
     public List<BirthdayTemplate> findActiveTemplates() {
-        return templateRepository.findByIsActiveTrueOrderByNameAsc();
+        return templateRepository.findByActiveTrueOrderByNameAsc();
     }
 
     public BirthdayTemplate findTemplateById(Long id) {
@@ -55,4 +55,5 @@ public class BirthdayService {
                 """, month);
     }
 }
+
 

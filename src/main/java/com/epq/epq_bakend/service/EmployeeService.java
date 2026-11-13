@@ -45,5 +45,80 @@ public class EmployeeService {
     public List<Employee> buscarPorNombreCompleto(String nombre) {
         return repository.findByFullNameContainingIgnoreCase(nombre);
     }
-    
+
+    public Employee actualizar(
+            Long id,
+            Employee employeeActualizado) {
+
+        Employee employee = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException(
+                        "Empleado no encontrado"));
+
+        employee.setDocumentType(
+                employeeActualizado.getDocumentType());
+
+        employee.setDocumentNumber(
+                employeeActualizado.getDocumentNumber());
+
+        employee.setFirstName(
+                employeeActualizado.getFirstName());
+
+        employee.setMiddleName(
+                employeeActualizado.getMiddleName());
+
+        employee.setLastName(
+                employeeActualizado.getLastName());
+
+        employee.setSecondLastName(
+                employeeActualizado.getSecondLastName());
+
+        employee.setSex(
+                employeeActualizado.getSex());
+
+        employee.setBirthDate(
+                employeeActualizado.getBirthDate());
+
+        employee.setAddress(
+                employeeActualizado.getAddress());
+
+        employee.setCity(
+                employeeActualizado.getCity());
+
+        employee.setPhone(
+                employeeActualizado.getPhone());
+
+        employee.setPersonalEmail(
+                employeeActualizado.getPersonalEmail());
+
+        employee.setInstitutionalEmail(
+                employeeActualizado.getInstitutionalEmail());
+
+        employee.setJobTitle(
+                employeeActualizado.getJobTitle());
+
+        employee.setPhotoUrl(
+                employeeActualizado.getPhotoUrl());
+
+        employee.setEmploymentStatus(
+                employeeActualizado.getEmploymentStatus());
+
+        employee.setHireDate(
+                employeeActualizado.getHireDate());
+
+        employee.setEndDate(
+                employeeActualizado.getEndDate());
+
+        employee.setContractType(
+                employeeActualizado.getContractType());
+
+        employee.setSalary(
+                employeeActualizado.getSalary());
+
+        employee.setAccountNumber(
+                employeeActualizado.getAccountNumber());
+
+        return repository.save(employee);
+
+    }
+
 }

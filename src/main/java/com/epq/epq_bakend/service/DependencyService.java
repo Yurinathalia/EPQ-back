@@ -22,7 +22,7 @@ public class DependencyService {
     }
 
     public List<Dependency> findActive() {
-        return dependencyRepository.findByIsActiveTrueOrderByNameAsc();
+        return dependencyRepository.findByActiveTrueOrderByNameAsc();
     }
 
     public List<Dependency> findRoots() {

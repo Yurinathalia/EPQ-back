@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface DependencyRepository extends JpaRepository<Dependency, Long> {
-    List<Dependency> findByIsActiveTrueOrderByNameAsc();
+    List<Dependency> findByActiveTrueOrderByNameAsc();
 
     List<Dependency> findByParentIdIsNullOrderByNameAsc();
 

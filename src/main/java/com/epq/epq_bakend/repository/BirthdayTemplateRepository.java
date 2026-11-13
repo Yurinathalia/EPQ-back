@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface BirthdayTemplateRepository extends JpaRepository<BirthdayTemplate, Long> {
-    List<BirthdayTemplate> findByIsActiveTrueOrderByNameAsc();
+    List<BirthdayTemplate> findByActiveTrueOrderByNameAsc();
 }
+
