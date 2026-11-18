@@ -55,7 +55,7 @@ public class Employee {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @Column(name = "photo_url")
+    @Column(name = "photo_url", columnDefinition = "LONGTEXT")
     private String photoUrl;
 
     @Column(name = "employment_status")
