@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "employee")
+@SQLRestriction("is_deleted = false")
 public class Employee {
 
     @Id
@@ -75,6 +77,9 @@ public class Employee {
 
     @Column(name = "salary")
     private BigDecimal salary;
+
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
+    private boolean deleted = false;
 
     // GETTERS Y SETTERS
 
@@ -252,6 +257,14 @@ public class Employee {
 
     public void setSalary(BigDecimal salary) {
         this.salary = salary;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
 }

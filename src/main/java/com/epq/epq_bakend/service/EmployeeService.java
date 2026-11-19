@@ -25,7 +25,10 @@ public class EmployeeService {
     }
 
     public void eliminar(Long id) {
-        repository.deleteById(id);
+        Employee employee = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Empleado no encontrado"));
+        employee.setDeleted(true);
+        repository.save(employee);
     }
 
     public Employee buscarPorDocumento(String documento) {
