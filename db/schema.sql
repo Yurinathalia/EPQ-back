@@ -223,6 +223,7 @@ CREATE TABLE `employee` (
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `full_name` varchar(200) DEFAULT NULL,
   `age` int DEFAULT NULL,
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `document_number` (`document_number`),
   KEY `idx_employee_name` (`last_name`,`second_last_name`,`first_name`),
