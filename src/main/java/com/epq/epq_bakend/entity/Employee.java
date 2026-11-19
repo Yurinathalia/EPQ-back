@@ -4,9 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLRestriction;
 
 @Entity
 @Table(name = "employee")
+@SQLRestriction("is_deleted = false")
 public class Employee {
 
     @Id
@@ -55,7 +57,7 @@ public class Employee {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @Column(name = "photo_url")
+    @Column(name = "photo_url", columnDefinition = "LONGTEXT")
     private String photoUrl;
 
     @Column(name = "employment_status")
@@ -74,6 +76,9 @@ public class Employee {
      */
     @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private EmployeePrivateData privateData;
+
+    @Column(name = "is_deleted", nullable = false, columnDefinition = "BOOLEAN NOT NULL DEFAULT FALSE")
+    private boolean deleted = false;
 
     // GETTERS Y SETTERS
 
@@ -273,6 +278,14 @@ public class Employee {
             privateData.setEmployee(this);
         }
         return privateData;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
 }
