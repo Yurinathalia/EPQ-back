@@ -67,14 +67,13 @@ public class Employee {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "account_number")
-    private String accountNumber;
-
-    @Column(name = "contract_type")
-    private String contractType;
-
-    @Column(name = "salary")
-    private BigDecimal salary;
+    /**
+     * Datos sensibles (contrato, salario, cuenta bancaria). Viven en
+     * employee_private_data y se manejan a traves de los accesos de abajo,
+     * para que el JSON del API siga siendo plano.
+     */
+    @OneToOne(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private EmployeePrivateData privateData;
 
     // GETTERS Y SETTERS
 
@@ -231,27 +230,49 @@ public class Employee {
     }
 
     public String getAccountNumber() {
-        return accountNumber;
+        return privateData == null ? null : privateData.getBankAccountNumber();
     }
 
     public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
+        if (privateData == null && accountNumber == null) {
+            return;
+        }
+        datosPrivados().setBankAccountNumber(accountNumber);
     }
 
     public String getContractType() {
-        return contractType;
+        return privateData == null ? null : privateData.getContractType();
     }
 
     public void setContractType(String contractType) {
-        this.contractType = contractType;
+        if (privateData == null && contractType == null) {
+            return;
+        }
+        datosPrivados().setContractType(contractType);
     }
 
     public BigDecimal getSalary() {
-        return salary;
+        return privateData == null ? null : privateData.getSalary();
     }
 
     public void setSalary(BigDecimal salary) {
-        this.salary = salary;
+        if (privateData == null && salary == null) {
+            return;
+        }
+        datosPrivados().setSalary(salary);
+    }
+
+    /**
+     * Devuelve la fila de datos privados creandola solo cuando hay algo que
+     * guardar. Nunca se llama desde un getter, para no insertar filas vacias
+     * al serializar.
+     */
+    private EmployeePrivateData datosPrivados() {
+        if (privateData == null) {
+            privateData = new EmployeePrivateData();
+            privateData.setEmployee(this);
+        }
+        return privateData;
     }
 
 }
