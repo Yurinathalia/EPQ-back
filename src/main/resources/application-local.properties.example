@@ -1,0 +1,6 @@
+# Credenciales LOCALES. Este archivo no se sube a git. 
+Cambia el nombre de este archivo, sin el example y ya funcionara
+"application-local.properties" 
+
+spring.datasource.username=root
+spring.datasource.password=TU_CONTRASEÑA_AQUI
