@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### agents ###
+.agents/
+
+### base de datos ###
+db/migrations/
+
+### credenciales locales ###
+application-local.properties
